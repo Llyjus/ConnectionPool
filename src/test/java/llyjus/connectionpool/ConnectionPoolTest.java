@@ -59,6 +59,19 @@ void shouldCreateConnectionWhenPoolIsEmpty() {
 
         assertNotSame(first, second);
     }
+
+
+    @Test
+    void fullPull() {
+        ConnectionPool pool = new ConnectionPool(1);
+
+        Connection first = pool.request();
+
+        assertNotNull(first);
+
+        assertThrows(
+                IllegalStateException.class,
+                pool::request
+        );
+    }
 }
-
-
