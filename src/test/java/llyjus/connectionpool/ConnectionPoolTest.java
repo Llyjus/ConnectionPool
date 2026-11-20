@@ -1,6 +1,8 @@
 package llyjus.connectionpool;
 
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +29,15 @@ class ConnectionPoolTest {
         assertDoesNotThrow(() -> new ConnectionPool(1));
         assertDoesNotThrow(() -> new ConnectionPool(65535));
     }
+
+    @Test
+void shouldCreateConnectionWhenPoolIsEmpty() {
+    ConnectionPool pool = new ConnectionPool(5);
+
+    Connection connection = pool.request();
+
+    assertNotNull(connection);
+}
 }
 
 

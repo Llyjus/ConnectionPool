@@ -7,4 +7,8 @@ public class ConnectionPool {
             throw new IllegalArgumentException();
         }
     }
+
+    public Connection request() {
+        return null;
+    }
 }
