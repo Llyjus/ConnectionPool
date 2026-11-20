@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
@@ -74,4 +75,17 @@ void shouldCreateConnectionWhenPoolIsEmpty() {
                 pool::request
         );
     }
+
+    @Test
+void shouldReuseReleasedConnection() {
+    ConnectionPool pool = new ConnectionPool(1);
+
+    Connection first = pool.request();
+
+    pool.release(first);
+
+    Connection second = pool.request();
+
+    assertSame(first, second);
+}
 }

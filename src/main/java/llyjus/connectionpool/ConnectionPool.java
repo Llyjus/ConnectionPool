@@ -27,4 +27,7 @@ public class ConnectionPool {
 
         return connection;
     }
+
+    public void release(Connection connection) {
+    }
 }
