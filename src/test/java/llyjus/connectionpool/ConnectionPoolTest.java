@@ -1,5 +1,6 @@
 package llyjus.connectionpool;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,12 @@ class ConnectionPoolTest {
                 IllegalArgumentException.class,
                 () -> new ConnectionPool(65536)
         );
+    }
+
+    @Test
+    void testEdgeCapacity() {
+        assertDoesNotThrow(() -> new ConnectionPool(1));
+        assertDoesNotThrow(() -> new ConnectionPool(65535));
     }
 }
 
