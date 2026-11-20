@@ -4,6 +4,7 @@ package llyjus.connectionpool;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
@@ -40,14 +41,24 @@ void shouldCreateConnectionWhenPoolIsEmpty() {
     assertNotNull(connection);
 }
 
-@Test
-void shouldReturnConnectionInUseState() {
-    ConnectionPool pool = new ConnectionPool(5);
+    @Test
+    void shouldReturnConnectionInUseState() {
+        ConnectionPool pool = new ConnectionPool(5);
 
-    Connection connection = pool.request();
+        Connection connection = pool.request();
 
-    assertEquals(Connection.Status.IN_USE, connection.getStatus());
-}
+        assertEquals(Connection.Status.IN_USE, connection.getStatus());
+    }
+
+    @Test
+    void shouldCreateDifferentConnectionsForMultipleRequests() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        Connection first = pool.request();
+        Connection second = pool.request();
+
+        assertNotSame(first, second);
+    }
 }
 
 
