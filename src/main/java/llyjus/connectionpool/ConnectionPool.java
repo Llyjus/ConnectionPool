@@ -9,6 +9,6 @@ public class ConnectionPool {
     }
 
     public Connection request() {
-        return null;
+        return new Connection();
     }
 }
