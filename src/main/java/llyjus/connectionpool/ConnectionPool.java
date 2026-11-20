@@ -3,7 +3,7 @@ package llyjus.connectionpool;
 public class ConnectionPool {
 
     public ConnectionPool(int capacity) {
-        if (capacity <= 0) {
+        if (capacity <= 0 || capacity >= 65536) {
             throw new IllegalArgumentException();
         }
     }
