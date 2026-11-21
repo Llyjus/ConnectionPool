@@ -103,4 +103,19 @@ void shouldCreateConnectionWhenPoolIsEmpty() {
 
         assertEquals(0, pool.getAvailableCount());
     }
+
+    @Test
+    void shouldReturnZeroInUseConnectionsWhenPoolIsEmpty() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        assertEquals(0, pool.getInUseCount());
+    }
+
+    @Test
+    void shouldReturnOneInUseConnections() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        Connection connection = pool.request();
+        assertEquals(1, pool.getInUseCount());
+    }
 }
