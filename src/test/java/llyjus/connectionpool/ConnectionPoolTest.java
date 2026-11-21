@@ -118,4 +118,15 @@ class ConnectionPoolTest {
         Connection connection = pool.request();
         assertEquals(1, pool.getInUseCount());
     }
+
+    @Test
+    void shouldReturnMultipleInUseConnections() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        pool.request();
+        pool.request();
+        pool.request();
+
+        assertEquals(3, pool.getInUseCount());
+}
 }
