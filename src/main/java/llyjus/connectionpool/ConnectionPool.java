@@ -48,4 +48,15 @@ public class ConnectionPool {
     public int getCapacity() {
         return capacity;
     }
+
+    // Get the current number of available connections in the pool
+    public int getAvailableCount() {
+        int count = 0;
+        for (Connection connection : connections) {
+            if (connection.getStatus() == Connection.Status.AVAILABLE) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
