@@ -77,15 +77,23 @@ void shouldCreateConnectionWhenPoolIsEmpty() {
     }
 
     @Test
-void shouldReuseReleasedConnection() {
-    ConnectionPool pool = new ConnectionPool(1);
+    void shouldReuseReleasedConnection() {
+        ConnectionPool pool = new ConnectionPool(1);
 
-    Connection first = pool.request();
+        Connection first = pool.request();
 
-    pool.release(first);
+        pool.release(first);
 
-    Connection second = pool.request();
+        Connection second = pool.request();
 
-    assertSame(first, second);
-}
+        assertSame(first, second);
+    }
+
+
+    @Test
+    void shouldReturnPoolCapacity() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        assertEquals(5, pool.getCapacity());
+    }
 }
