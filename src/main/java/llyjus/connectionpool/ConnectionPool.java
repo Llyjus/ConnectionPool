@@ -44,4 +44,8 @@ public class ConnectionPool {
     public void release(Connection connection) {
         connection.release();
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
 }
