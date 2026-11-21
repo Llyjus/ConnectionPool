@@ -34,7 +34,7 @@ class ConnectionPoolTest {
     }
 
     @Test
-void shouldCreateConnectionWhenPoolIsEmpty() {
+    void shouldCreateConnectionWhenPoolIsEmpty() {
     ConnectionPool pool = new ConnectionPool(5);
 
     Connection connection = pool.request();
