@@ -12,7 +12,17 @@ public class Connection {
         this.status = Status.IN_USE;
     }
 
+    public void release() {
+        this.status = Status.AVAILABLE;
+    }
+
+    public void acquire() {
+    this.status = Status.IN_USE;
+    }
+
     public Status getStatus() {
         return status;
     }
+
+
 }

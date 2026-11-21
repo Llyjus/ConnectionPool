@@ -18,6 +18,14 @@ public class ConnectionPool {
     }
 
     public Connection request() {
+
+        for (Connection connection : connections) {
+            if (connection.getStatus() == Connection.Status.AVAILABLE) {
+                connection.acquire();
+                return connection;
+            }
+        }
+
         if (connections.size() >= capacity) {
             throw new IllegalStateException("Connection pool is full");
         }
@@ -29,5 +37,6 @@ public class ConnectionPool {
     }
 
     public void release(Connection connection) {
+        connection.release();
     }
 }
