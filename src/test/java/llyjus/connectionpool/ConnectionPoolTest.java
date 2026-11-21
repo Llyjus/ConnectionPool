@@ -105,6 +105,16 @@ class ConnectionPoolTest {
     }
 
     @Test
+    void shouldReturnOneAvailableCount() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        Connection connection = pool.request();
+        pool.release(connection);
+
+        assertEquals(1, pool.getAvailableCount());
+    }
+
+    @Test
     void shouldReturnZeroInUseConnectionsWhenPoolIsEmpty() {
         ConnectionPool pool = new ConnectionPool(5);
 
@@ -128,5 +138,5 @@ class ConnectionPoolTest {
         pool.request();
 
         assertEquals(3, pool.getInUseCount());
-}
+    }
 }
