@@ -96,4 +96,11 @@ void shouldCreateConnectionWhenPoolIsEmpty() {
 
         assertEquals(5, pool.getCapacity());
     }
+
+    @Test
+    void shouldReturnZeroAvailableCountWhenPoolIsEmpty() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        assertEquals(0, pool.getAvailableCount());
+    }
 }
