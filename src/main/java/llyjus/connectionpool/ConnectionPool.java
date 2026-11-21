@@ -59,4 +59,14 @@ public class ConnectionPool {
         }
         return count;
     }
+
+    public int getInUseCount() {
+        int count = 0;
+        for (Connection connection : connections) {
+            if (connection.getStatus() == Connection.Status.IN_USE) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
