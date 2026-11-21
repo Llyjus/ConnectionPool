@@ -8,6 +8,7 @@ public class ConnectionPool {
     private final int capacity;
     private final List<Connection> connections;
 
+    // Check if the capacity is valid (greater than 0 and less than 65536)
     public ConnectionPool(int capacity) {
         if (capacity <= 0 || capacity >= 65536) {
             throw new IllegalArgumentException();
@@ -17,8 +18,10 @@ public class ConnectionPool {
         this.connections = new ArrayList<>();
     }
 
+    // Request a connection from the pool
     public Connection request() {
 
+        // Check for available connections
         for (Connection connection : connections) {
             if (connection.getStatus() == Connection.Status.AVAILABLE) {
                 connection.acquire();
@@ -26,6 +29,7 @@ public class ConnectionPool {
             }
         }
 
+        // Raise an exception if the pool is full
         if (connections.size() >= capacity) {
             throw new IllegalStateException("Connection pool is full");
         }
@@ -36,6 +40,7 @@ public class ConnectionPool {
         return connection;
     }
 
+    // Release the connection
     public void release(Connection connection) {
         connection.release();
     }
