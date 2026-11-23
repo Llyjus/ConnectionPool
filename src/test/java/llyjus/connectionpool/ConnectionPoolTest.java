@@ -237,4 +237,21 @@ class ConnectionPoolTest {
 
         assertEquals(Connection.Status.IN_USE, second.getStatus());
     }
+
+    @Test
+    void shouldUpdateCountsAfterReusingConnection() {
+        ConnectionPool pool = new ConnectionPool(1);
+
+        Connection connection = pool.request();
+        pool.release(connection);
+
+        assertEquals(1, pool.getAvailableCount());
+        assertEquals(0, pool.getInUseCount());
+
+        pool.request();
+
+        assertEquals(0, pool.getAvailableCount());
+        assertEquals(1, pool.getInUseCount());
+        assertEquals(2, pool.getTotalConnections());
+    }
 }
