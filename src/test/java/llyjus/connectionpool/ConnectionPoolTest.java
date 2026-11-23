@@ -28,7 +28,7 @@ class ConnectionPoolTest {
     }
 
     @Test
-    void testEdgeCapacity() {
+    void shouldAcceptEdgeCases() {
         assertDoesNotThrow(() -> new ConnectionPool(1));
         assertDoesNotThrow(() -> new ConnectionPool(65535));
     }
