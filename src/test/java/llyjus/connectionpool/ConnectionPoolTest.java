@@ -139,4 +139,11 @@ class ConnectionPoolTest {
 
         assertEquals(3, pool.getInUseCount());
     }
+
+    @Test
+    void shouldReturnZeroTotalConnectionsWhenPoolIsEmpty() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        assertEquals(0, pool.getTotalConnections());
+    }
 }
