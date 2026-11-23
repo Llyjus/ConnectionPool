@@ -169,4 +169,15 @@ class ConnectionPoolTest {
         assertEquals(3, pool.getTotalConnections());
     }
 
+    @Test
+    void shouldNotIncreaseTotalConnectionsWhenRequestFails() {
+        ConnectionPool pool = new ConnectionPool(1);
+
+        pool.request();
+
+        assertThrows(IllegalStateException.class, pool::request);
+
+        assertEquals(1, pool.getTotalConnections());
+    }
+
 }
