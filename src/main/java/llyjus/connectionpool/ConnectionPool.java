@@ -46,9 +46,18 @@ public class ConnectionPool {
     // Release the connection
     public void release(Connection connection) {
         // Check if the connection available
-        if (connection == null || !connections.contains(connection)) {
-        throw new IllegalArgumentException("Connection cannot be null");
+        if (connection == null) {
+            throw new IllegalArgumentException("Connection cannot be null");
         }
+        // Check if the connection belongs to this pool
+        if (!connections.contains(connection)) {
+            throw new IllegalArgumentException("Connection does not belong to this pool");
+        }
+        // Check if the connection is already released
+        if (connection.getStatus() == Connection.Status.AVAILABLE) {
+            throw new IllegalStateException("Connection has already been released");
+        }
+
         connection.release();
     }
 
