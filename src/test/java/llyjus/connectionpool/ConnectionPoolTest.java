@@ -148,7 +148,7 @@ class ConnectionPoolTest {
     }
 
     @Test
-    void shouldReturnTwoTotalConnections() {
+    void shouldCountReusedConnectionRequests() {
         ConnectionPool pool = new ConnectionPool(5);
         Connection connection = pool.request();
         pool.release(connection);
@@ -159,7 +159,7 @@ class ConnectionPoolTest {
     
 
     @Test
-    void shouldReturnThreeTotalConnections() {
+    void shouldCountMultipleSuccessfulRequests() {
         ConnectionPool pool = new ConnectionPool(5);
 
         pool.request();
