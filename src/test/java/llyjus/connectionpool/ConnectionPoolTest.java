@@ -180,4 +180,13 @@ class ConnectionPoolTest {
         assertEquals(1, pool.getTotalConnections());
     }
 
+    @Test
+    void shouldUpdateInUseCountAfterReleasingConnection() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        Connection connection = pool.request();
+        pool.release(connection);
+
+        assertEquals(0, pool.getInUseCount());
+    }
 }
