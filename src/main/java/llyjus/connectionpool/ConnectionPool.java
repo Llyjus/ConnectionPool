@@ -63,6 +63,7 @@ public class ConnectionPool {
         return count;
     }
 
+    // Get the current number of in-use connections in the pool
     public int getInUseCount() {
         int count = 0;
         for (Connection connection : connections) {
@@ -73,6 +74,7 @@ public class ConnectionPool {
         return count;
     }
 
+    // Get the total number of connections in the pool
     public int getTotalConnections() {
         return totalConnections;
     }
