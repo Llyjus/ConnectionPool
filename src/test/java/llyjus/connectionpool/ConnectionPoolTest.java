@@ -211,4 +211,18 @@ class ConnectionPoolTest {
                 () -> pool.release(connection)
         );
     }
+
+    @Test
+    void shouldRejectReleasingConnectionTwice() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        Connection connection = pool.request();
+
+        pool.release(connection);
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> pool.release(connection)
+        );
+    }
 }
