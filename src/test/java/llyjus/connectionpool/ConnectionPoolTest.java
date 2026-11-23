@@ -225,4 +225,16 @@ class ConnectionPoolTest {
                 () -> pool.release(connection)
         );
     }
+
+    @Test
+    void shouldSetReusedConnectionToInUse() {
+        ConnectionPool pool = new ConnectionPool(1);
+
+        Connection first = pool.request();
+        pool.release(first);
+
+        Connection second = pool.request();
+
+        assertEquals(Connection.Status.IN_USE, second.getStatus());
+    }
 }
