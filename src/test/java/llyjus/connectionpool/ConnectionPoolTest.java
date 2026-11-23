@@ -189,4 +189,14 @@ class ConnectionPoolTest {
 
         assertEquals(0, pool.getInUseCount());
     }
+
+    @Test
+    void shouldRejectNullConnection() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> pool.release(null)
+        );
+    }
 }
