@@ -199,4 +199,16 @@ class ConnectionPoolTest {
                 () -> pool.release(null)
         );
     }
+
+    @Test
+    void shouldRejectConnectionNotBelongingToPool() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        Connection connection = new Connection();
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> pool.release(connection)
+        );
+    }
 }

@@ -45,6 +45,10 @@ public class ConnectionPool {
 
     // Release the connection
     public void release(Connection connection) {
+        // Check if the connection available
+        if (connection == null || !connections.contains(connection)) {
+        throw new IllegalArgumentException("Connection cannot be null");
+        }
         connection.release();
     }
 
