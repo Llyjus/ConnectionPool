@@ -12,7 +12,7 @@ public class ConnectionPool {
     // Check if the capacity is valid (greater than 0 and less than 65536)
     public ConnectionPool(int capacity) {
         if (capacity <= 0 || capacity >= 65536) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Capacity must be between 1 and 65535");
         }
 
         this.capacity = capacity;
