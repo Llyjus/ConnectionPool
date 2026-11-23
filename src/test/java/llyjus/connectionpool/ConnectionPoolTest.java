@@ -146,4 +146,27 @@ class ConnectionPoolTest {
 
         assertEquals(0, pool.getTotalConnections());
     }
+
+    @Test
+    void shouldReturnTwoTotalConnections() {
+        ConnectionPool pool = new ConnectionPool(5);
+        Connection connection = pool.request();
+        pool.release(connection);
+        pool.request();
+
+        assertEquals(2, pool.getTotalConnections());
+    }
+    
+
+    @Test
+    void shouldReturnThreeTotalConnections() {
+        ConnectionPool pool = new ConnectionPool(5);
+
+        pool.request();
+        pool.request();
+        pool.request();
+
+        assertEquals(3, pool.getTotalConnections());
+    }
+
 }
