@@ -7,6 +7,7 @@ public class ConnectionPool {
 
     private final int capacity;
     private final List<Connection> connections;
+    private int totalConnections = 0;
 
     // Check if the capacity is valid (greater than 0 and less than 65536)
     public ConnectionPool(int capacity) {
@@ -25,6 +26,7 @@ public class ConnectionPool {
         for (Connection connection : connections) {
             if (connection.getStatus() == Connection.Status.AVAILABLE) {
                 connection.acquire();
+                totalConnections++;
                 return connection;
             }
         }
@@ -36,6 +38,7 @@ public class ConnectionPool {
 
         Connection connection = new Connection();
         connections.add(connection);
+        totalConnections++;
 
         return connection;
     }
@@ -68,5 +71,9 @@ public class ConnectionPool {
             }
         }
         return count;
+    }
+
+    public int getTotalConnections() {
+        return totalConnections;
     }
 }
