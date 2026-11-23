@@ -63,7 +63,7 @@ class ConnectionPoolTest {
 
 
     @Test
-    void fullPull() {
+    void shouldRejectRequestWhenPoolIsFull() {
         ConnectionPool pool = new ConnectionPool(1);
 
         Connection first = pool.request();
